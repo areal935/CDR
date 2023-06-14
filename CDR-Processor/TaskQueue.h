@@ -12,6 +12,8 @@ class TaskQueue_mt
 {
 public:
 	TaskQueue_mt();
+	TaskQueue_mt(const TaskQueue_mt&& a_other);
+
 	void Push(T a_task);
 	void Pop(T& a_item);
 
@@ -24,6 +26,12 @@ private:
 template <typename T>
 TaskQueue_mt<T>::TaskQueue_mt()
 	:m_handledQueue{} , m_queueMutex{} , m_queuePossiblyNotEmpty{}
+{
+}
+
+template <typename T>
+TaskQueue_mt<T>::TaskQueue_mt(const TaskQueue_mt&& a_other)
+	: m_handledQueue{} , m_queueMutex{} , m_queuePossiblyNotEmpty{}
 {
 }
 

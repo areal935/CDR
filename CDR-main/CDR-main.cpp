@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <list>
 #include "QueryGetway.h"
 #include "QueryAnswer.h"
 #include "CDR.h"
@@ -29,13 +30,22 @@ void FromNetwork(DataBase_mt& a_db)
 {
     simplenet::SimpleNetMT net{4010};
 
-   /* while (true)
+    std::vector<std::shared_ptr<simplenet::SimpleNetMT::Connection>> connected;
+    std::list<TaskQueue_mt<connection>> queues;
+    std::list<QueryGetway> getwayQuerys;
+    std::list<QueryAnswer> AnswerQuerys;
+
+    while (true)
     {
-        simplenet::SimpleNetMT::Connection c = net.WaitForConnection();
-        TaskQueue_mt<connection> Queries{};
-        QueryGetway getway{Queries, &c};
-        QueryAnswer response{a_db, Queries, &c};
-    }*/
+        std::shared_ptr<simplenet::SimpleNetMT::Connection> c = std::make_shared<simplenet::SimpleNetMT::Connection>(net.WaitForConnection());
+        connected.push_back(c);
+        //TaskQueue_mt<connection> Queries{};
+        queues.push_back({});
+        getwayQuerys.push_back({queues.back(), c});
+        AnswerQuerys.push_back({a_db, queues.back()});
+        /*QueryGetway getway{Queries, c};
+        QueryAnswer response{a_db, Queries};*/
+    }
 }
 
 int main()
@@ -46,18 +56,18 @@ int main()
     CDR getCDRs{Cdrs, fileCdr};
     ParserCDR parser{db, Cdrs};
 
-    //std::thread network_t{&FromNetwork, std::ref(db)};
+    std::thread network_t{&FromNetwork, std::ref(db)};
 
     TaskQueue_mt<connection> Queries{};
     QueryGetway getway{Queries, &std::cin};
     QueryAnswer response{db, Queries, &std::cout};
 
-    TaskQueue_mt<connection> QueriesNet{};
+    /*TaskQueue_mt<connection> QueriesNet{};
     QueryGetway getway1{QueriesNet};
-    QueryAnswer response2{db, QueriesNet};
+    QueryAnswer response2{db, QueriesNet};*/
 
-    while(true)
-        ;
+    /*while(true)
+        ;*/
 
-    //network_t.join();
+    network_t.join();
 }

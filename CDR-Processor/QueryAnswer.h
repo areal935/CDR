@@ -17,13 +17,13 @@ public:
 	QueryAnswer(const DataBase_mt& a_db, TaskQueue_mt<connection>& a_containerQueries, std::ostream* a_whereOutput);
 	QueryAnswer(const DataBase_mt& a_db, TaskQueue_mt<connection>& a_containerQueries);
 	QueryAnswer(const QueryAnswer& a_other) = delete;
+	QueryAnswer(const QueryAnswer&& a_other);
 	QueryAnswer& operator=(const QueryAnswer& a_other) = delete;
 	~QueryAnswer() = default;
 
 	void Response();
 
 private:
-	const std::string KINDS_QUERIES[3] = {"msisdn", "operator", "link"};
 
 	std::string Answer(std::vector<std::string>& query) const;
 	std::string Msisdn(const std::string& a_query) const;
@@ -34,7 +34,7 @@ private:
 	const DataBase_mt& m_db;
 	TaskQueue_mt<connection>& m_containerQueries;
 	std::optional<std::ostream*> m_whereOutput;
-	std::thread m_consumerQueriesThread;
+	mutable std::thread m_consumerQueriesThread;
 };
 
 }

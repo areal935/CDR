@@ -7,6 +7,8 @@
 namespace experis
 {
 
+const std::string KINDS_QUERIES[3] = {"msisdn", "operator", "link"};
+
 QueryAnswer::QueryAnswer(const DataBase_mt& a_db, TaskQueue_mt<connection>& a_containerQueries, std::ostream* a_whereOutput)
 	: m_db{a_db}, m_containerQueries{a_containerQueries}
 	, m_whereOutput{a_whereOutput}, m_consumerQueriesThread{&QueryAnswer::Response, this}
@@ -17,6 +19,13 @@ QueryAnswer::QueryAnswer(const DataBase_mt& a_db, TaskQueue_mt<connection>& a_co
 	: m_db{a_db}, m_containerQueries{a_containerQueries}
 	, m_whereOutput{}, m_consumerQueriesThread{&QueryAnswer::Response, this}
 {
+}
+
+QueryAnswer::QueryAnswer(const QueryAnswer&& a_other)
+	: m_db{a_other.m_db}, m_containerQueries{a_other.m_containerQueries}
+	, m_whereOutput{}, m_consumerQueriesThread{}
+{
+	m_consumerQueriesThread.swap(a_other.m_consumerQueriesThread);
 }
 
 struct IllegalQueryException : public std::exception
@@ -42,7 +51,7 @@ void QueryAnswer::Response()
 		{
 			assert(!m_whereOutput.has_value());
 			NetworkResponse(query, response);
-			delete query.second.value();
+			//delete query.second.value();
 		}
 		else
 		{
@@ -69,7 +78,8 @@ std::string QueryAnswer::Answer(std::vector<std::string>& query) const
 	}
 	else
 	{
-		throw IllegalQueryException{query.at(0), "is illegal query"};
+		return query.at(0) + " is illegal query\n";
+		//throw IllegalQueryException{query.at(0), "is illegal query"};
 	}
 	return response;
 }
