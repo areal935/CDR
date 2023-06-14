@@ -25,10 +25,7 @@ public:
 
 private:
 
-	std::string Answer(std::vector<std::string>& query) const;
-	std::string Msisdn(const std::string& a_query) const;
-	std::string Operator(const std::string& a_query) const;
-	std::string Link(const std::string& a_query, const std::string& a_queryOther) const;
+	std::string Answer(std::vector<std::string>& a_query) const;
 	void NetworkResponse(connection query, const std::string& response) const;
 
 	const DataBase_mt& m_db;

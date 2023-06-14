@@ -146,6 +146,7 @@
     <ClCompile Include="DataBase.cpp" />
     <ClCompile Include="HendlerFunction.cpp" />
     <ClCompile Include="ParserCDR.cpp" />
+    <ClCompile Include="QueriesKinds.cpp" />
     <ClCompile Include="QueryAnswer.cpp" />
     <ClCompile Include="QueryGetway.cpp" />
     <ClCompile Include="TaskQueue.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="DataBase.h" />
     <ClInclude Include="HendlerFunction.h" />
     <ClInclude Include="ParserCDR.h" />
+    <ClInclude Include="QueriesKinds.h" />
     <ClInclude Include="QueryAnswer.h" />
     <ClInclude Include="QueryGetway.h" />
     <ClInclude Include="TaskQueue.h" />
