@@ -86,7 +86,7 @@ std::string Link::Response(std::vector<std::string>& a_query, const DataBase_mt&
 
 std::string Start::Response(std::vector<std::string>& a_query, const DataBase_mt& a_db) const
 {
-	return "wellcom";
+	return "wellcom\n";
 }
 
 bool detail::IsNumber(const std::string& a_text)

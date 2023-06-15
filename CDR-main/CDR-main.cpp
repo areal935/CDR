@@ -11,18 +11,18 @@
 
 using namespace experis;
 
-void JsonFormat(std::string a_query, std::ostream& a_os)
-{
-    a_os << "{"
-        << "\n\t\"msisdn\": " << a_query 
-        << "\n\t\"voice-out\": " << 61523
-        << "\n\t\"voice-in\": " << 1343
-        << "\n\t\"data-out\": " << 9273
-        << "\n\t\"data-in\": " << 8215
-        << "\n\t\"sms-out\": " << 54
-        << "\n\t\"sms-in\": " << 21
-        << "\n}";
-}
+//void JsonFormat(std::string a_query, std::ostream& a_os)
+//{
+//    a_os << "{"
+//        << "\n\t\"msisdn\": " << a_query 
+//        << "\n\t\"voice-out\": " << 61523
+//        << "\n\t\"voice-in\": " << 1343
+//        << "\n\t\"data-out\": " << 9273
+//        << "\n\t\"data-in\": " << 8215
+//        << "\n\t\"sms-out\": " << 54
+//        << "\n\t\"sms-in\": " << 21
+//        << "\n}";
+//}
 
 using connection = std::pair<std::vector<std::string>, std::optional<simplenet::SimpleNetMT::Connection*>>;
 
