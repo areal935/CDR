@@ -5,8 +5,8 @@
 namespace experis
 {
 
-ContactDetails::ContactDetails(const MSISDN& a_msisdn)
-	: m_msisdn{a_msisdn}, m_details{0}
+ContactDetails::ContactDetails(const MSISDN& a_phoneNum)
+	: m_msisdn{a_phoneNum}, m_details{0}
 {
 }
 
@@ -22,9 +22,9 @@ ContactDetails& ContactDetails::operator=(const ContactDetails& a_other)
 	return *this;
 }
 
-void ContactDetails::Add(const UsageType a_usageType, const DATA a_data)
+void ContactDetails::Add(const UsageType a_usageType, const DATA a_quantity)
 {
-	this->m_details.at(a_usageType) += a_data;
+	this->m_details.at(a_usageType) += a_quantity;
 }
 
 ContactDetails::DATA ContactDetails::Get(const UsageType a_usageType) const

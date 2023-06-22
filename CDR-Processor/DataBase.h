@@ -13,21 +13,22 @@ class DataBase_mt
 public:
 	DataBase_mt();
 
-	void Insert(const IMSI& a_imsi, const MSISDN& a_msisdn, const UsageType a_usageType, DATA a_data);
-	void Insert(const IMSI& a_imsi, const MSISDN& a_msisdn, const MSISDN& a_msisdnOther, const UsageType a_usageType, DATA a_data);
-	DATA GetMsisdn(const MSISDN& a_msisdn, const UsageType a_usageType) const;
-	DATA GetOperator(const IMSI& a_imsi, const UsageType a_usageType) const;
-	std::list<MSISDN> GetPath(const MSISDN& a_msisdn, const MSISDN& a_msisdnOther, std::pair<DATA, DATA>& a_link) const;
-	bool ContainsMsisdn(const MSISDN& a_msisdn) const;
-	bool ContainsImsi(const IMSI& a_imsi) const;
-	bool ContainsLink(const MSISDN& a_msisdn, const MSISDN& a_msisdnOther) const;
+	void Insert(const SIM_ID& a_simId, const PHONE_NUM& a_phoneNum, const UsageType a_usageType, QUANTITY a_quantity);
+	void Insert(const SIM_ID& a_simId, const PHONE_NUM& a_phoneNum, const PHONE_NUM& a_phoneNumOther, const UsageType a_usageType, QUANTITY a_quantity);
+	QUANTITY GetPhoneNumInfo(const PHONE_NUM& a_phoneNum, const UsageType a_usageType) const;
+
+	QUANTITY GetOperator(const SIM_ID& a_simId, const UsageType a_usageType) const;
+	std::list<PHONE_NUM> GetPath(const PHONE_NUM& a_phoneNum, const PHONE_NUM& a_phoneNumOther, std::pair<QUANTITY, QUANTITY>& a_link) const;
+	bool ContainsPhoneNum(const PHONE_NUM& a_phoneNum) const;
+	bool ContainsSimId(const SIM_ID& a_simId) const;
+	bool ContainsLink(const PHONE_NUM& a_phoneNum, const PHONE_NUM& a_phoneNumOther) const;
 
 private:
-	void InitialNewKey(const IMSI& a_imsi, const MSISDN& a_msisdn);
-	void AddNeighbors(const MSISDN& a_msisdn, const MSISDN& a_msisdnOther, const UsageType a_usageType, DATA a_data);
-	std::list<MSISDN> BFS(const MSISDN& a_msisdn, const MSISDN& a_msisdnOther) const;
+	void InitialNewKey(const SIM_ID& a_simId, const PHONE_NUM& a_phoneNum);
+	void AddNeighbors(const PHONE_NUM& a_phoneNum, const PHONE_NUM& a_phoneNumOther, const UsageType a_usageType, QUANTITY a_quantity);
+	std::list<PHONE_NUM> BFS(const PHONE_NUM& a_phoneNum, const PHONE_NUM& a_phoneNumOther) const;
 
-	DB m_db;
+	std::unordered_map<PHONE_NUM, ContactDetails> m_db;
 	SUBSCRIBERS m_subscribers;
 	LINKED_GRAPH m_neighbors;
 	mutable std::mutex m_dbMutex;

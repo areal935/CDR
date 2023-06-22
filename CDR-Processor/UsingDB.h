@@ -5,11 +5,14 @@
 namespace experis
 {
 
-using MSISDN = unsigned long long;
-using IMSI = unsigned int;
-using DATA = unsigned long long;
-using DB = std::unordered_map<MSISDN, ContactDetails>;
-using SUBSCRIBERS = std::unordered_map<IMSI, std::vector<MSISDN>>;
-using LINKED_GRAPH = std::unordered_map<MSISDN, std::unordered_map<MSISDN, std::pair <DATA, DATA>>>;
+using PHONE_NUM = unsigned long long;
+//phone number
+using SIM_ID = unsigned int;
+	//sim_id
+using QUANTITY = unsigned long long;
+
+using SUBSCRIBERS = std::unordered_map<SIM_ID, std::vector<PHONE_NUM>>;
+using LINKED_GRAPH = std::unordered_map<PHONE_NUM, std::unordered_map<PHONE_NUM, std::pair <QUANTITY, QUANTITY>>>;
+	//{phone_num:{phone_num:(q,q)}}
 
 }

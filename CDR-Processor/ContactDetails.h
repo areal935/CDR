@@ -27,17 +27,18 @@ class ContactDetails
 
 public:
 	ContactDetails() = default;
-	ContactDetails(const MSISDN& a_msisdn);
+	ContactDetails(const MSISDN& a_phoneNum);
 	ContactDetails(const ContactDetails& a_other);
 	ContactDetails& operator=(const ContactDetails& a_other);
 	~ContactDetails() = default;
 
-	void Add(const UsageType a_usageType, const DATA a_data);
+	void Add(const UsageType a_usageType, const DATA a_quantity);
 	DATA Get(const UsageType a_usageType) const;
 
 private:
 	MSISDN m_msisdn;
-	std::array<DATA, UsageType::USAGE_TYPE_SIZE> m_details;
+
+	std::array<unsigned long long, UsageType::USAGE_TYPE_SIZE> m_details;
 };
 
 }

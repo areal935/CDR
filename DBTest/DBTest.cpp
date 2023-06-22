@@ -14,25 +14,25 @@ namespace DBTest
 		{
 			experis::DataBase_mt db{};
 			db.Insert(40052, 9720524410144, experis::DO, 567);
-			Assert::AreEqual(567ULL, db.GetMsisdn(9720524410144ULL, experis::DO));
+			Assert::AreEqual(567ULL, db.GetPhoneNumInfo(9720524410144ULL, experis::DO));
 
 			db.Insert(40052, 9720528391949, experis::DO, 893);
-			Assert::AreEqual(893ULL, db.GetMsisdn(9720528391949ULL, experis::DO));
+			Assert::AreEqual(893ULL, db.GetPhoneNumInfo(9720528391949ULL, experis::DO));
 
 			db.Insert(40052, 9720524410144, 9720528391949, experis::MOC, 567);
 			db.Insert(40052, 9720528391949, 9720524410144, experis::MTC, 567);
-			Assert::AreEqual(567ULL, db.GetMsisdn(9720524410144ULL, experis::MOC));
-			Assert::AreEqual(567ULL, db.GetMsisdn(9720528391949ULL, experis::MTC));
+			Assert::AreEqual(567ULL, db.GetPhoneNumInfo(9720524410144ULL, experis::MOC));
+			Assert::AreEqual(567ULL, db.GetPhoneNumInfo(9720528391949ULL, experis::MTC));
 
 			db.Insert(40052, 9720524410144, 9720523355899, experis::MOC, 900);
 			db.Insert(40052, 9720523355899, 9720524410144, experis::MTC, 900);
-			Assert::AreEqual(1467ULL, db.GetMsisdn(9720524410144ULL, experis::MOC));
-			Assert::AreEqual(900ULL, db.GetMsisdn(9720523355899ULL, experis::MTC));
+			Assert::AreEqual(1467ULL, db.GetPhoneNumInfo(9720524410144ULL, experis::MOC));
+			Assert::AreEqual(900ULL, db.GetPhoneNumInfo(9720523355899ULL, experis::MTC));
 
 			bool isThrow = false;
 			try
 			{
-				db.GetMsisdn(9720523350899ULL, experis::MTC);
+				db.GetPhoneNumInfo(9720523350899ULL, experis::MTC);
 			}
 			catch (std::exception e)
 			{

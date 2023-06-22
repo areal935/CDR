@@ -133,6 +133,11 @@
   <ItemGroup>
     <ClCompile Include="CDR-main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Network\Network.vcxproj">
+      <Project>{30c5c4d3-e7b8-4a60-a587-18365e3bce72}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

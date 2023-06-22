@@ -1,6 +1,7 @@
 #pragma once
 #include "TaskQueue.h"
 #include "DataBase.h"
+#include "CDR.h"
 #include <thread>
 
 namespace experis
@@ -10,7 +11,7 @@ class ParserCDR
 {
 public:
 	ParserCDR() = delete;
-	ParserCDR(DataBase_mt& a_db, TaskQueue_mt<std::vector<std::string>>& a_containerQueries);
+	ParserCDR(DataBase_mt& a_db, CDR::CDR_QUEUE& a_containerQueries);
 	ParserCDR(const ParserCDR& a_other) = delete;
 	ParserCDR& operator=(const ParserCDR& a_other) = delete;
 	~ParserCDR() = default;
@@ -38,7 +39,7 @@ private:
 	void InsertSMSToDb(const std::vector<std::string>& a_cdr);
 
 	DataBase_mt& m_db;
-	TaskQueue_mt<std::vector<std::string>>& m_containerCDRs;
+	CDR::CDR_QUEUE& m_containerCDRs;
 	std::thread m_consumerCDRsThread;
 };
 

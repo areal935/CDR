@@ -5,7 +5,7 @@
 namespace experis
 {
 
-CDR::CDR(TaskQueue_mt<std::vector<std::string>>& a_containerQueries, std::istream& a_whereInput)
+CDR::CDR(CDR_QUEUE& a_containerQueries, std::istream& a_whereInput)
 	: m_containerCDRs{a_containerQueries}, m_producerCDRsThread{&CDR::GetCDRs, this}, m_whereInput{a_whereInput}
 {
 }
